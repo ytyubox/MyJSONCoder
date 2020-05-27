@@ -9,6 +9,8 @@ import XCTest
 @testable import MyJSONCoder
 private let data:Data = Bundle(for: _JSONTests.self)
     .getFile(name: "level1")
+private let arrayJson:Data = Bundle(for: _JSONTests.self)
+.getFile(name: "array")
 
 struct Level1: Codable {
     var name: String
@@ -19,10 +21,15 @@ class _JSONTests:XCTest {
     var jsonDecoder = _JSONDecoder(data: data)
     func testNotNil() {
         XCTAssertNotNil(jsonDecoder.json)
-        XCTAssertNotNil(jsonDecoder.json["name"])
-        XCTAssertNotNil(jsonDecoder.json["jobs"])
+//        XCTAssertNotNil(jsonDecoder.json["name"])
+//        XCTAssertNotNil(jsonDecoder.json["jobs"])
     }
-    
-    
+    var arrayDecoder = _JSONDecoder(data: arrayJson)
+    func testArray() {
+        XCTAssertNotNil(data)
+        let array:[Any]! = arrayDecoder.json as? [Any]
+        XCTAssertNotNil(array)
+        
+    }
 }
 
