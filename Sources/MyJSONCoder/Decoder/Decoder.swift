@@ -29,7 +29,10 @@ struct _JSONDecoder: Decoder {
     }
     
     func unkeyedContainer() throws -> UnkeyedDecodingContainer {
-        throw Yet.todo
+        guard let list = json as? [Any] else {
+            throw MyDecodingError.dataCorrupted(MyDecodingError.Context(codingPath: [], debugDescription: "json is not array"))
+        }
+        return MyUnkeyedDecodingContainer(list: list, codingPath: [])
     }
     
     func singleValueContainer() throws -> SingleValueDecodingContainer {
