@@ -10,6 +10,10 @@ import XCTest
 private let data:Data = Bundle(for: _JSONTests.self)
     .getFile(name: "level1")
 
+struct Level1: Codable {
+    var name: String
+    var jobs: String
+}
 
 class _JSONTests:XCTest {
     var jsonDecoder = _JSONDecoder(data: data)
@@ -19,4 +23,6 @@ class _JSONTests:XCTest {
         XCTAssertNotNil(jsonDecoder.json["jobs"])
     }
     
+    
 }
+
